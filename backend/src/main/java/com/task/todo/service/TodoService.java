@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface TodoService {
     List<TodoDto.Response> getList();
-    void addTodo(TodoDto.PostRequest postRequest);
-    void updateTodo(Long todoId, TodoDto.PutRequest putRequest);
+    TodoDto.Response addTodo(TodoDto.PostRequest postRequest);
+    TodoDto.Response updateTodo(Long todoId, TodoDto.PutRequest putRequest);
     void updateTodoStatus(Long todoId, TodoDto.PatchRequest patchRequest);
     void deleteTodo(Long todoId);
 }

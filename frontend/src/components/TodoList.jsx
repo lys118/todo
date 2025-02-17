@@ -1,12 +1,16 @@
 import React from "react";
 import Todo from "./Todo";
 import { Flex } from "antd";
-const TodoList = ({ title }) => {
+const TodoList = ({ title, todos }) => {
+  const divStyle = {
+    width: "400px",
+  };
   return (
-    <div>
+    <div style={divStyle}>
       <h1 style={{ textAlign: "center" }}>{title}</h1>
-      <Todo />
-      <Todo />
+      {todos.map((todo) => (
+        <Todo key={todo.id} todo={todo} />
+      ))}
     </div>
   );
 };

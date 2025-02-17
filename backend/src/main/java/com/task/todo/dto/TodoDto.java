@@ -24,6 +24,7 @@ public class TodoDto {
     public static class PostRequest{
         private String title;
         private String content;
+        private TodoStatus todoStatus;
         private TodoType todoType;
         private LocalDate localDate;
     }

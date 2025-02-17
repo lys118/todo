@@ -27,20 +27,22 @@ public class TodoServiceImpl implements TodoService {
     //할일 추가
     @Transactional
     @Override
-    public void addTodo(TodoDto.PostRequest postRequest) {
+    public TodoDto.Response addTodo(TodoDto.PostRequest postRequest) {
         Todo todo = modelMapper.map(postRequest, Todo.class);
-        todoRepository.save(todo);
+        Todo savedTodo = todoRepository.save(todo);
+        return modelMapper.map(savedTodo,TodoDto.Response.class);
     }
 
     //내용 수정
     @Transactional
     @Override
-    public void updateTodo(Long todoId,TodoDto.PutRequest putRequest) {
+    public TodoDto.Response updateTodo(Long todoId,TodoDto.PutRequest putRequest) {
         Todo todo = todoRepository.findById(todoId).orElseThrow();
         todo.updateTitle(putRequest.getTitle());
         todo.updateContent(putRequest.getContent());
 
-        todoRepository.save(todo);
+        Todo savedTodo = todoRepository.save(todo);
+        return modelMapper.map(savedTodo,TodoDto.Response.class);
     }
 
     //상태 수정

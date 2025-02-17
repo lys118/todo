@@ -2,12 +2,14 @@ package com.task.todo.controller;
 
 import com.task.todo.dto.TodoDto;
 import com.task.todo.service.TodoService;
+import com.task.todo.type.TodoType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,8 +21,11 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping
-    public ResponseEntity<List<TodoDto.Response>> getList(){
-        return ResponseEntity.ok(todoService.getList());
+    public ResponseEntity<List<TodoDto.Response>> getList(
+            @RequestParam("todoType") TodoType todoType,
+            @RequestParam(value = "localDate", required = false, defaultValue = "") String localDateStr) {
+        LocalDate localDate = localDateStr.isEmpty() ? null : LocalDate.parse(localDateStr);
+        return ResponseEntity.ok(todoService.getList(todoType,localDate));
     }
 
     @PostMapping

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import TodoList from "../components/TodoList";
-import { Layout, Typography, Button, Modal, Flex } from "antd";
+import { Layout, Typography, Button, Modal, Flex, Calendar, theme } from "antd";
 import { useTodos } from "../context/TodoProvider";
 import TodoWrite from "../components/TodoWrite";
 
 const TodoPage = () => {
   const { Header, Sider, Content } = Layout;
-  const { Title } = Typography;
-  const { todos } = useTodos();
+  const { Title, Link } = Typography;
+  const { todos, setTodoTypeObj } = useTodos();
 
   //모달창설정////////////////////////
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -43,6 +43,32 @@ const TodoPage = () => {
     margin: "20px 0",
   };
 
+  const linkTextStyle = {
+    fontSize: "30px",
+    fontWeight: "bold",
+  };
+  ///sider ////////////
+  //general 타입으로 바꾸기링크
+  const handleGeneralType = () => {
+    setTodoTypeObj({ todoType: "GENERAL", localDate: "" });
+  };
+  //캘린더값
+  const onChange = (value) => {
+    setTodoTypeObj({
+      todoType: "TODAY",
+      localDate: value.format("YYYY-MM-DD"),
+    });
+  };
+
+  const { token } = theme.useToken();
+  //캘린더css
+  const wrapperStyle = {
+    width: 300,
+    margin: "0 auto",
+    border: `1px solid ${token.colorBorderSecondary}`,
+    borderRadius: token.borderRadiusLG,
+  };
+
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>
@@ -50,8 +76,13 @@ const TodoPage = () => {
       </Header>
       <Layout>
         <Sider style={siderStyle} width={400}>
-          <Title level={2}>평소에 할일</Title>
+          <Link onClick={handleGeneralType} style={linkTextStyle}>
+            평소에 할일
+          </Link>
           <Title level={2}>오늘의 할일</Title>
+          <div style={wrapperStyle}>
+            <Calendar fullscreen={false} onChange={onChange} />
+          </div>
         </Sider>
         <Content>
           <div style={buttonContainerStyle}>

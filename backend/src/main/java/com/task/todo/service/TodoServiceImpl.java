@@ -3,11 +3,13 @@ package com.task.todo.service;
 import com.task.todo.dto.TodoDto;
 import com.task.todo.entity.Todo;
 import com.task.todo.repository.TodoRepository;
+import com.task.todo.type.TodoType;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,9 +20,9 @@ public class TodoServiceImpl implements TodoService {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<TodoDto.Response> getList() {
-        return todoRepository.findAll().stream().map(
-                todo -> modelMapper.map(todo, TodoDto.Response.class)
+    public List<TodoDto.Response> getList(TodoType todoType, LocalDate localDate) {
+        return todoRepository.findByTodoTypeAndLocalDate(todoType,localDate)
+                .stream().map(todo -> modelMapper.map(todo, TodoDto.Response.class)
         ).toList();
     }
 

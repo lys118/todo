@@ -7,11 +7,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 public class TodoDto {
-    @Getter
-    public static class GetRequest{
-        private TodoType todoType;
-        private LocalDate localDate;
-    }
+
     @Getter
     public static class Response{
         private Long id;
@@ -19,6 +15,7 @@ public class TodoDto {
         private String content;
         private TodoStatus todoStatus;
         private TodoType todoType;
+        private LocalDate localDate;
     }
     @Getter
     public static class PostRequest{

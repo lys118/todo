@@ -3,7 +3,7 @@ import { Button, Form, Input } from "antd";
 import { useTodos } from "../context/TodoProvider";
 
 const TodoWrite = ({ oldTodo, onClose }) => {
-  const { handleAddTodo, handleUpdateTodo } = useTodos();
+  const { handleAddTodo, handleUpdateTodo, todoTypeObj } = useTodos();
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -39,7 +39,8 @@ const TodoWrite = ({ oldTodo, onClose }) => {
       const todo = {
         ...values.todo,
         todoStatus: "TODO",
-        todoType: "GENERAL",
+        todoType: todoTypeObj.todoType,
+        localDate: todoTypeObj.localDate,
       };
       handleAddTodo(todo);
     }

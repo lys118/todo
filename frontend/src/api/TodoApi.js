@@ -3,9 +3,11 @@ import React from "react";
 
 const TODO_API_SERVER_HOST = "http://localhost:8080/api/todos";
 
-export const getListApi = async () => {
+export const getListApi = async (todoTypeObj) => {
   try {
-    const res = await axios.get(`${TODO_API_SERVER_HOST}`);
+    const res = await axios.get(`${TODO_API_SERVER_HOST}`, {
+      params: todoTypeObj,
+    });
     return res.data;
   } catch (error) {
     console.error("TODO 조회 실패");

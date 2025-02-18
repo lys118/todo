@@ -15,16 +15,18 @@ const Todo = ({ todo }) => {
     setIsModalVisible(false);
   };
 
-  const handleStatusChange = () => {
+  const handleStatusChange = (e) => {
     const newStatus = todo.todoStatus === "TODO" ? "DONE" : "TODO";
     handleUpdateTodoStatus(todo.id, newStatus);
+    e.stopPropagation();
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (e) => {
     const userConfirmed = window.confirm("정말 삭제하시겠습니까?");
     if (userConfirmed) {
       handleDeleteTodo(todo.id);
     }
+    e.stopPropagation();
   };
 
   const truncateTitle = (title) => {

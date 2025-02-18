@@ -67,7 +67,7 @@ export const TodoProvider = ({ children }) => {
       const res = await patchTodoStatusApi(todoId, todoStatus);
       return res;
     } catch (error) {
-      alert("todo 조회 실패");
+      alert("todo 상태변경 실패");
     }
   }, []);
 
@@ -76,7 +76,7 @@ export const TodoProvider = ({ children }) => {
       const res = await deleteTodoApi(todoId);
       return res;
     } catch (error) {
-      alert("todo 조회 실패");
+      alert("todo 삭제 실패");
     }
   }, []);
 
@@ -99,7 +99,6 @@ export const TodoProvider = ({ children }) => {
   //수정핸들러
   const handleUpdateTodo = useCallback(
     async (todoId, todo) => {
-      console.log(todo);
       const result = await putTodo(todoId, todo);
       if (result) {
         setTodos((prevTodos) =>

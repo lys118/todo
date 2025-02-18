@@ -5,13 +5,16 @@ import com.task.todo.type.TodoType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 public class TodoDto {
 
     @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Response{
         private Long id;
         private String title;
@@ -21,6 +24,9 @@ public class TodoDto {
         private LocalDate localDate;
     }
     @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class PostRequest{
         @NotEmpty(message = "Title is required")
         @Size(max = 20, message = "Title must be less than 20 characters")
@@ -39,6 +45,9 @@ public class TodoDto {
     }
 
     @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class PutRequest{
         @NotEmpty(message = "Title is required")
         @Size(max = 20, message = "Title must be less than 20 characters")
@@ -49,6 +58,9 @@ public class TodoDto {
     }
 
     @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class PatchRequest{
         @NotNull(message = "TodoStatus is required")
         private TodoStatus todoStatus;

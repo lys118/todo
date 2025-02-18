@@ -3,10 +3,18 @@ package com.task.todo.entity;
 import com.task.todo.type.TodoStatus;
 import com.task.todo.type.TodoType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "todo")
 public class Todo {
     @Id

@@ -10,6 +10,6 @@
 2. 실행
 - 백엔드 스프링부트 application.properties에서 db스키마 todo 설정후 계정암호 비밀번호 변경 후 실행
 - 프론트는 npm install 진행 후 실행
-- api 주소는 http://localhost:8080/swagger-ui/index.html
+- apidoc 주소는 http://localhost:8080/swagger-ui/index.html
 
 3. 주력 컴포넌트 : TodoProvider 이유 : 상태관리 편함

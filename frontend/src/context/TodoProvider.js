@@ -82,8 +82,7 @@ export const TodoProvider = ({ children }) => {
 
   useEffect(() => {
     getTodoList();
-  }, [todoTypeObj]);
-
+  }, [todoTypeObj, getTodoList]);
   //handle//////////////////////////
   //추가핸들러
   const handleAddTodo = useCallback(

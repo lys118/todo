@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,13 @@ public class TodoServiceImpl implements TodoService {
 
     private final TodoRepository todoRepository;
     private final ModelMapper modelMapper;
-
+    //공통처리
+    private Todo findById(Long todoId){
+        return todoRepository.findById(todoId).orElseThrow(
+                () -> new NoSuchElementException(todoId+"를 찾을 수 없습니다")
+        );
+    }
+    //조회
     @Override
     public List<TodoDto.Response> getList(TodoType todoType, LocalDate localDate) {
         return todoRepository.findByTodoTypeAndLocalDate(todoType,localDate)
@@ -39,7 +46,7 @@ public class TodoServiceImpl implements TodoService {
     @Transactional
     @Override
     public TodoDto.Response updateTodo(Long todoId,TodoDto.PutRequest putRequest) {
-        Todo todo = todoRepository.findById(todoId).orElseThrow();
+        Todo todo = findById(todoId);
         todo.updateTitle(putRequest.getTitle());
         todo.updateContent(putRequest.getContent());
 
@@ -51,7 +58,7 @@ public class TodoServiceImpl implements TodoService {
     @Transactional
     @Override
     public void updateTodoStatus(Long todoId,TodoDto.PatchRequest patchRequest) {
-        Todo todo = todoRepository.findById(todoId).orElseThrow();
+        Todo todo = findById(todoId);
         todo.updateTodoStatus(patchRequest.getTodoStatus());
         todoRepository.save(todo);
     }
@@ -60,7 +67,7 @@ public class TodoServiceImpl implements TodoService {
     @Transactional
     @Override
     public void deleteTodo(Long todoId) {
-        Todo todo = todoRepository.findById(todoId).orElseThrow();
+        Todo todo = findById(todoId);
         todoRepository.delete(todo);
     }
 }
